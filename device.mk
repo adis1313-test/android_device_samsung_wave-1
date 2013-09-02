@@ -151,6 +151,12 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
 	packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml
 
+# Google Play
+PRODUCT_COPY_FILES += \
+	device/samsung/wave/prebuilt/GPlay/GoogleLoginService.apk:system/app/GoogleLoginService.apk \
+	device/samsung/wave/prebuilt/GPlay/GoogleServicesFramework.apk:system/app/GoogleServicesFramework.apk \
+	device/samsung/wave/prebuilt/GPlay/Phonesky.apk:system/app/Phonesky.apk \
+
 # The OpenGL ES API level that is natively supported by this device.
 # This is a 16.16 fixed point number
 PRODUCT_PROPERTY_OVERRIDES := \
