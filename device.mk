@@ -166,6 +166,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	   rild.libpath=/system/lib/libmocha-ril.so \
 	   ro.sf.lcd_density=240
 
+# Disabled SGX540 scissor optimiaztion
+PRODUCT_PROPERTY_OVERRIDES += \
+       ro.hwui.disable_scissor_opt=true
+
 # enable Google-specific location features,
 # like NetworkLocationProvider and LocationCollector
 PRODUCT_PROPERTY_OVERRIDES += \
