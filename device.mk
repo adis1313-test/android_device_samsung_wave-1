@@ -133,7 +133,8 @@ PRODUCT_PACKAGES += \
 	SamsungServiceMode \
 	WaveParts \
 	tvouthack \
-	Torch
+	Torch \
+	NSTools
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
