@@ -477,7 +477,7 @@ static int fimc_v4l2_s_ext_ctrl(int fp, unsigned int id, void *value)
     int ret;
 
     ctrl.id = id;
-    ctrl.string = (char *) value;
+    ctrl.string = value;
 
     ctrls.ctrl_class = V4L2_CTRL_CLASS_CAMERA;
     ctrls.count = 1;
