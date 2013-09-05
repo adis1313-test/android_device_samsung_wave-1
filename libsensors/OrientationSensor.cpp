@@ -170,7 +170,7 @@ int OrientationSensor::readEvents(sensors_event_t* data, int count)
                 numEventReceived++;
             }
         } else {
-            ALOGE("OrientationSensor: unknown event (type=%d, code=%d)",
+            LOGE("OrientationSensor: unknown event (type=%d, code=%d)",
                     type, event->code);
         }
         mInputReader.next();

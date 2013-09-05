@@ -191,7 +191,7 @@ sensors_poll_context_t::sensors_poll_context_t()
 
     int wakeFds[2];
     int result = pipe(wakeFds);
-    ALOGE_IF(result<0, "error creating wake pipe (%s)", strerror(errno));
+    LOGE_IF(result<0, "error creating wake pipe (%s)", strerror(errno));
     fcntl(wakeFds[0], F_SETFL, O_NONBLOCK);
     fcntl(wakeFds[1], F_SETFL, O_NONBLOCK);
     mWritePipeFd = wakeFds[1];
@@ -250,7 +250,7 @@ int sensors_poll_context_t::real_activate(int handle, int enabled) {
     if (enabled && !err) {
         const char wakeMessage(WAKE_MESSAGE);
         int result = write(mWritePipeFd, &wakeMessage, 1);
-        ALOGE_IF(result<0, "error sending wake message (%s)", strerror(errno));
+        LOGE_IF(result<0, "error sending wake message (%s)", strerror(errno));
     }
     return err;
 }
@@ -291,14 +291,14 @@ int sensors_poll_context_t::pollEvents(sensors_event_t* data, int count)
             n = poll(mPollFds, numFds, nbEvents ? 0 : -1);
             } while (n < 0 && errno == EINTR);
             if (n<0) {
-                ALOGE("poll() failed (%s)", strerror(errno));
+                LOGE("poll() failed (%s)", strerror(errno));
                 return -errno;
             }
             if (mPollFds[wake].revents & POLLIN) {
                 char msg;
                 int result = read(mPollFds[wake].fd, &msg, 1);
-                ALOGE_IF(result<0, "error reading from wake pipe (%s)", strerror(errno));
-                ALOGE_IF(msg != WAKE_MESSAGE, "unknown message on wake queue (0x%02x)", int(msg));
+                LOGE_IF(result<0, "error reading from wake pipe (%s)", strerror(errno));
+                LOGE_IF(msg != WAKE_MESSAGE, "unknown message on wake queue (0x%02x)", int(msg));
 
                 mPollFds[wake].revents = 0;
             }

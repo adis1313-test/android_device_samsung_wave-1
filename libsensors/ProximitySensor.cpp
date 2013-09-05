@@ -129,7 +129,7 @@ int ProximitySensor::readEvents(sensors_event_t* data, int count)
                 numEventReceived++;
             }
         } else {
-            ALOGE("ProximitySensor: unknown event (type=%d, code=%d)",
+            LOGE("ProximitySensor: unknown event (type=%d, code=%d)",
                     type, event->code);
         }
         mInputReader.next();

@@ -165,7 +165,7 @@ int AkmSensor::enable(int32_t handle, int en)
         else
             err = akm_disable_sensor(sensor_type);
 
-        ALOGE_IF(err, "Could not change sensor state (%s)", strerror(-err));
+        LOGE_IF(err, "Could not change sensor state (%s)", strerror(-err));
         if (!err) {
             mEnabled &= ~(1<<what);
             mEnabled |= (uint32_t(flags)<<what);
@@ -202,7 +202,7 @@ int AkmSensor::loadAKMLibrary()
         akm_enable_sensor = stub_enable_disable_sensor;
         akm_disable_sensor = stub_enable_disable_sensor;
         akm_set_delay = stub_set_delay;
-        ALOGE("AkmSensor: unable to load AKM Library, %s", dlerror());
+        LOGE("AkmSensor: unable to load AKM Library, %s", dlerror());
         return -ENOENT;
     }
 
@@ -248,7 +248,7 @@ int AkmSensor::readEvents(sensors_event_t* data, int count)
                 mInputReader.next();
             }
         } else {
-            ALOGE("AkmSensor: unknown event (type=%d, code=%d)",
+            LOGE("AkmSensor: unknown event (type=%d, code=%d)",
                     type, event->code);
             mInputReader.next();
         }
