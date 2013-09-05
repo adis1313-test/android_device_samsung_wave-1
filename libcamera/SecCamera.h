@@ -20,9 +20,6 @@
 #ifndef ANDROID_HARDWARE_CAMERA_SEC_H
 #define ANDROID_HARDWARE_CAMERA_SEC_H
 
-#ifndef V4L2_CTRL_TYPE_STRING
-#define V4L2_CTRL_TYPE_STRING
-
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
