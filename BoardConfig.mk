@@ -35,7 +35,6 @@ BOARD_USES_LIBSECRIL_STUB := true
 BOARD_NO_PAGE_FLIPPING := false
 BOARD_NO_32BPP := false
 
-TARGET_ARCH := arm
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_ARCH_VARIANT := armv7-a-neon
@@ -109,10 +108,6 @@ WIFI_DRIVER_FW_PATH_AP      := "/vendor/firmware/fw_bcmdhd_apsta.bin"
 # adb has root
 ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=0
 
-# Bluetooth
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/wave/bluetooth 
-BOARD_BLUEDROID_VENDOR_CONF := device/samsung/wave/prebuilt/libbt_vndcfg.txt 
-
 # Vold
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/s3c-usbgadget/gadget/lun%d/file"
@@ -136,15 +131,6 @@ BOARD_USES_SKTEXTBOX := true
 
 # Hardware rendering
 USE_OPENGL_RENDERER := true
-
-# TARGET_DISABLE_TRIPLE_BUFFERING can be used to disable triple buffering
-# on per target basis. On crespo it is possible to do so in theory
-# to save memory, however, there are currently some limitations in the
-# OpenGL ES driver that in conjunction with disable triple-buffering
-# would hurt performance significantly (see b/6016711)
-TARGET_DISABLE_TRIPLE_BUFFERING := false
-
-BOARD_ALLOW_EGL_HIBERNATION := true
 
 # Include wave specific stuff
 -include device/samsung/wave/Android.mk
