@@ -35,13 +35,13 @@ Smb380Sensor::Smb380Sensor()
       mInputReader(4),
       mHasPendingEvent(false)
 {
-    ALOGD("Smb380Sensor::Smb380Sensor()");
+    LOGD("Smb380Sensor::Smb380Sensor()");
     mPendingEvent.version = sizeof(sensors_event_t);
     mPendingEvent.sensor = ID_A;
     mPendingEvent.type = SENSOR_TYPE_ACCELEROMETER;
     memset(mPendingEvent.data, 0, sizeof(mPendingEvent.data));
     
-    ALOGD("Smb380Sensor::Smb380Sensor() open data_fd");
+    LOGD("Smb380Sensor::Smb380Sensor() open data_fd");
 	
     if (data_fd) {
         strcpy(input_sysfs_path, "/sys/class/input/");
@@ -55,7 +55,7 @@ Smb380Sensor::Smb380Sensor()
 
 Smb380Sensor::~Smb380Sensor() {
 
-    ALOGD("Smb380Sensor::~Smb380Sensor()");
+    LOGD("Smb380Sensor::~Smb380Sensor()");
     if (mEnabled) {
         enable(0, 0);
     }
@@ -66,15 +66,15 @@ Smb380Sensor::~Smb380Sensor() {
 int Smb380Sensor::enable(int32_t, int en) {
 
 	   
-    ALOGD("Smb380Sensor::~enable(0, %d)", en);
+    LOGD("Smb380Sensor::~enable(0, %d)", en);
     int flags = en ? 1 : 0;
     if (flags != mEnabled) {
         int fd;
         strcpy(&input_sysfs_path[input_sysfs_path_len], "enable");
-        ALOGD("Smb380Sensor::~enable(0, %d) open %s",en,  input_sysfs_path);
+        LOGD("Smb380Sensor::~enable(0, %d) open %s",en,  input_sysfs_path);
         fd = open(input_sysfs_path, O_RDWR);
         if (fd >= 0) {
-             ALOGD("Smb380Sensor::~enable(0, %d) opened %s",en,  input_sysfs_path);
+             LOGD("Smb380Sensor::~enable(0, %d) opened %s",en,  input_sysfs_path);
             char buf[2];
             int err;
             buf[1] = 0;
@@ -98,14 +98,14 @@ int Smb380Sensor::enable(int32_t, int en) {
 bool Smb380Sensor::hasPendingEvents() const {
     /* FIXME probably here should be returning mEnabled but instead
 	mHasPendingEvents. It does not work, so we cheat.*/
-    //ALOGD("Smb380Sensor::~hasPendingEvents %d", mHasPendingEvent ? 1 : 0 );
+    //LOGD("Smb380Sensor::~hasPendingEvents %d", mHasPendingEvent ? 1 : 0 );
     return mHasPendingEvent;
 }
 
 
 int Smb380Sensor::setDelay(int32_t handle, int64_t ns)
 {
-    ALOGD("Smb380Sensor::~setDelay(%d, %lld)", handle, ns);
+    LOGD("Smb380Sensor::~setDelay(%d, %lld)", handle, ns);
 
     int fd;
 
@@ -128,7 +128,7 @@ int Smb380Sensor::setDelay(int32_t handle, int64_t ns)
 
 int Smb380Sensor::readEvents(sensors_event_t* data, int count)
 {
-    //ALOGD("Smb380Sensor::~readEvents() %d", count);
+    //LOGD("Smb380Sensor::~readEvents() %d", count);
     if (count < 1)
         return -EINVAL;
         
@@ -171,7 +171,7 @@ int Smb380Sensor::readEvents(sensors_event_t* data, int count)
         mInputReader.next();
     }
  
-	//ALOGD("Smb380Sensor::~readEvents() numEventReceived = %d", numEventReceived);
+	//LOGD("Smb380Sensor::~readEvents() numEventReceived = %d", numEventReceived);
 	return numEventReceived++;
 		
 }
