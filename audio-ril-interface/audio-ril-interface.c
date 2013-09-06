@@ -30,7 +30,7 @@ HRilClient OpenClient_RILD(void)
 {
 	struct srs_client *client = NULL;
 
-	ALOGE("%s()", __func__);
+	LOGE("%s()", __func__);
 
 	signal(SIGPIPE, SIG_IGN);
 
@@ -44,7 +44,7 @@ int Connect_RILD(HRilClient data)
 	struct srs_client *client;
 	int rc;
 
-	ALOGE("%s(%p)", __func__, data);
+	LOGE("%s(%p)", __func__, data);
 
 	if (data == NULL)
 		return RIL_CLIENT_ERR_INVAL;
@@ -53,13 +53,13 @@ int Connect_RILD(HRilClient data)
 
 	rc = srs_client_open(client);
 	if (rc < 0) {
-		ALOGE("%s: Failed to open SRS client", __func__);
+		LOGE("%s: Failed to open SRS client", __func__);
 		return RIL_CLIENT_ERR_CONNECT;
 	}
 
 	rc = srs_client_ping(client);
 	if (rc < 0) {
-		ALOGE("%s: Failed to ping SRS client", __func__);
+		LOGE("%s: Failed to ping SRS client", __func__);
 		return RIL_CLIENT_ERR_UNKNOWN;
 	}
 
@@ -71,7 +71,7 @@ int Disconnect_RILD(HRilClient data)
 	struct srs_client *client;
 	int rc;
 
-	ALOGE("%s(%p)", __func__, data);
+	LOGE("%s(%p)", __func__, data);
 
 	if (data == NULL)
 		return RIL_CLIENT_ERR_INVAL;
@@ -80,7 +80,7 @@ int Disconnect_RILD(HRilClient data)
 
 	rc = srs_client_close(client);
 	if (rc < 0) {
-		ALOGE("%s: Failed to close SRS client", __func__);
+		LOGE("%s: Failed to close SRS client", __func__);
 		return RIL_CLIENT_ERR_INVAL;
 	}
 
@@ -92,7 +92,7 @@ int CloseClient_RILD(HRilClient data)
 	struct srs_client *client;
 	int rc;
 
-	ALOGE("%s(%p)", __func__, data);
+	LOGE("%s(%p)", __func__, data);
 
 	if (data == NULL)
 		return RIL_CLIENT_ERR_INVAL;
@@ -109,7 +109,7 @@ int isConnected_RILD(HRilClient data)
 	struct srs_client *client;
 	int rc;
 
-	ALOGE("%s(%p)", __func__, data);
+	LOGE("%s(%p)", __func__, data);
 
 	if (data == NULL)
 		return RIL_CLIENT_ERR_INVAL;
@@ -118,7 +118,7 @@ int isConnected_RILD(HRilClient data)
 
 	rc = srs_client_ping(client);
 	if (rc < 0) {
-		ALOGE("%s: Failed to ping SRS client", __func__);
+		LOGE("%s: Failed to ping SRS client", __func__);
 		return 0;
 	}
 
@@ -131,7 +131,7 @@ int SetVolume(HRilClient data, SoundType type, int level)
 	struct srs_snd_set_volume_packet volume;
 	int rc;
 
-	ALOGE("%s(%p, %d, %d)", __func__, data, type, level);
+	LOGE("%s(%p, %d, %d)", __func__, data, type, level);
 
 	if (data == NULL)
 		return RIL_CLIENT_ERR_INVAL;
@@ -148,7 +148,7 @@ int SetVolume(HRilClient data, SoundType type, int level)
 			volume.outDevice = SND_OUTPUT_3;
 			break;
 		default:
-			ALOGE("%s: type %d not supported", __func__, type);
+			LOGE("%s: type %d not supported", __func__, type);
 			return RIL_CLIENT_ERR_UNKNOWN;
 			break;
 	}
@@ -172,7 +172,7 @@ int SetAudioPath(HRilClient data, AudioPath path)
 	struct srs_snd_enable_disable_packet en_pkt;
 	int rc;
 
-	ALOGE("%s(%p, %d)", __func__, data, path);
+	LOGE("%s(%p, %d)", __func__, data, path);
 	
 	if (data == NULL)
 		return RIL_CLIENT_ERR_INVAL;
@@ -191,7 +191,7 @@ int SetAudioPath(HRilClient data, AudioPath path)
 			audio_path.soundType = SND_TYPE_VOICE;
 			break;
 		default:
-			ALOGE("%s: path %d not supported", __func__, path);
+			LOGE("%s: path %d not supported", __func__, path);
 			return RIL_CLIENT_ERR_UNKNOWN;
 			break;
 	}
@@ -211,7 +211,7 @@ int PcmIfCtrl(HRilClient data, int enabled)
 	struct srs_snd_enable_disable_packet en_pkt;
 	int rc;
 
-	ALOGE("%s(%p, %d)", __func__, data, enabled);
+	LOGE("%s(%p, %d)", __func__, data, enabled);
 	
 	if (data == NULL)
 		return RIL_CLIENT_ERR_INVAL;
